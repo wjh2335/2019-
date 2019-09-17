@@ -1,0 +1,18 @@
+import processing.serial.*;
+Serial p;
+void setup()
+{
+  size(300,300);
+  p=new Serial(this,"COM3",9600);
+}
+void draw()
+{
+  if(p.available()>0)
+  {
+    String m=p.readString();
+    int a=int(m.trim());
+    println(a);
+    fill(a,a,a);
+    ellipse(150,150,200,200);
+  }
+}
