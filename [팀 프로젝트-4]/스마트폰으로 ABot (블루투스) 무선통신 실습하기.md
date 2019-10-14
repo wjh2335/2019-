@@ -1,5 +1,5 @@
 ## 1. 유튜브 링크
-https://www.youtube.com/channel/UCw2alDqfe2myd5JtcaqY0dQ?view_as=subscriber
+[유튜브 링크](https://www.youtube.com/channel/UCw2alDqfe2myd5JtcaqY0dQ?view_as=subscriber)
 ## 2. 실습에 대한 자세한 설명(카페 참고, 개별)
 
 >### ●아두이노 코드
