@@ -1,5 +1,5 @@
 ## 1. 유튜브 링크
-
+https://www.youtube.com/channel/UCw2alDqfe2myd5JtcaqY0dQ?view_as=subscriber
 ## 2. 실습에 대한 자세한 설명(카페 참고, 개별)
 
 >### ●아두이노 코드
@@ -16,14 +16,14 @@
 	{
 		if (Serial.available())
 		{
-			  char b[2];
-			  int p,r;
-			  Serial.readBytes(b, 2);
-			  p=b[0]*3;
-			  r=b[1];
-			  sr.write(1500+p-r);
-			  sl.write(1500-p-r);
-			  Serial.write('1');
+			char b[2];
+			int p,r;
+			Serial.readBytes(b, 2);
+			p=b[0]*3;
+			r=b[1];
+			sr.write(1500+p-r);
+			sl.write(1500-p-r);
+			Serial.write('1');
 		}
 	}
 ```
