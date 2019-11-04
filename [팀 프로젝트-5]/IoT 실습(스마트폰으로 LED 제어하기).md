@@ -27,17 +27,17 @@ Client c;
 Server s;
 void setup()
 {
-	p = new Serial(this, "COM4", 9600);
-	s = new Server(this, 12345);
+	p=new Serial(this,"COM3", 9600);
+	s=new Server(this,12345);
 	textSize(64);
 }
 void draw()
 {
-	c = s.available();
+	c=s.available();
 	if(c!=null)
 	{
-		String m = c.readString();
-		m = m.substring(m.length()-1);
+		String m=c.readString();
+		m=m.substring(m.length()-1);
 		print(m);
 		p.write(m);
 	}
