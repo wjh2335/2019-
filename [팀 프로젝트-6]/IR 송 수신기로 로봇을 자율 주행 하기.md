@@ -2,88 +2,100 @@
 [유튜브 링크](https://youtube.com)
 # 2. 소스코드
 ```c
-#include <Servo.h>                           // Include servo library
- 
-Servo servoLeft;                             // Declare left and right servos
+#include <Servo.h>
+
+Servo servoLeft;
 Servo servoRight;
- 
-void setup()                                 // Built-in initialization block
-{
-  pinMode(10, INPUT);  pinMode(9, OUTPUT);   // Left IR LED & Receiver
-  pinMode(3, INPUT);  pinMode(2, OUTPUT);    // Right IR LED & Receiver
 
-  servoLeft.attach(13);                      // Attach left signal to pin 13
-  servoRight.attach(12);                     // Attach right signal to pin 12
-}  
- 
-void loop()                                  // Main loop auto-repeats
+void setup()
 {
-  int irLeft = irDetect(9, 10, 38000);       // Check for object on left
-  int irRight = irDetect(2, 3, 38000);       // Check for object on right
-
-  if((irLeft == 0) && (irRight == 0))        // If both sides detect
-  {
-    backward(1000);                          // Back up 1 second
-    turnLeft(800);                           // Turn left about 120 degrees
-  }
-  else if(irLeft == 0)                       // If only left side detects
-  {
-    backward(1000);                          // Back up 1 second
-    turnRight(400);                          // Turn right about 60 degrees
-  }
-  else if(irRight == 0)                      // If only right side detects
-  {
-    backward(1000);                          // Back up 1 second
-    turnLeft(400);                           // Turn left about 60 degrees
-  }
-  else                                       // Otherwise, no IR detected
-  {
-    forward(20);                             // Forward 1/50 of a second
-  }
+	pinMode(10,INPUT);
+	pinMode(9,OUTPUT);
+	
+	pinMode(3,INPUT);
+	pinMode(2,OUTPUT);
+	
+	servoLeft.attach(13);
+	servoRight.attach(12);
 }
-
-int irDetect(int irLedPin, int irReceiverPin, long frequency)
+void loop()
 {
-  tone(irLedPin, frequency, 8);              // IRLED 38 kHz for at least 1 ms
-  delay(1);                                  // Wait 1 ms
-  int ir = digitalRead(irReceiverPin);       // IR receiver -> ir variable
-  delay(1);                                  // Down time before recheck
-  return ir;                                 // Return 1 no detect, 0 detect
-}  
-
-void forward(int time)                       // Forward function
-{
-  servoLeft.write(1700);         // Left wheel counterclockwise
-  servoRight.write(1300);        // Right wheel clockwise
-  delay(time);                               // Maneuver for time ms
+	int irLeft=irDetect(9,10,38000);
+	int irRight=irDetect(2,3,38000);
+	if(irLeft==0 && irRight==0)
+	{
+		backward(1000);
+		turnLeft(800);
+	}
+	else if(irLeft==0)
+	{
+		backward(1000);
+		turnRight(400);
+	}
+	else if(irRight==0)
+	{
+		backward(1000);
+		turnLeft(400);
+	}
+	else forward(20);
 }
-
-void turnLeft(int time)                      // Left turn function
+int irDetect(int irLedPin,int irReceiverPin,long frequency)
 {
-  servoLeft.write(1300);         // Left wheel clockwise
-  servoRight.write(1300);        // Right wheel clockwise
-  delay(time);                               // Maneuver for time ms
+	tone(irLedPin,frequency,8);
+	delay(1);
+	int ir=digitalRead(irReceiverPin);
+	delay(1);
+	return ir;
 }
-
-void turnRight(int time)                     // Right turn function
+void forward(int time)
 {
-  servoLeft.write(1700);         // Left wheel counterclockwise
-  servoRight.write(1700);        // Right wheel counterclockwise
-  delay(time);                               // Maneuver for time ms
+	servoLeft.write(1700);
+	servoRight.write(1300);
+	delay(time);
 }
-
-void backward(int time)                      // Backward function
+void turnLeft(int time)
 {
-  servoLeft.write(1300);         // Left wheel clockwise
-  servoRight.write(1700);        // Right wheel counterclockwise
-  delay(time);                               // Maneuver for time ms
+	servoLeft.write(1300);
+	servoRight.write(1300);
+	delay(time);
+}
+void turnRight(int time)
+{
+	servoLeft.write(1700);
+	servoRight.write(1700);
+	delay(time);
+}
+void backward(int time)
+{
+	servoLeft.write(1300);
+	servoRight.write(1700);
+	delay(time);
 }
 ```
-# 3. 회로도
+# 3. 회로
+## 3.1. 회로도
 ![1](/img/10.jpg)
-▲
+
+▲ 회로도
 ![1](/img/11.jpg)
-▲
+
+▲ 실제로 만든 회로
+## 3.2. 저항
+#### 저항은 색 3개를 이용해서 그 저항이 몇 옴인지 나타낸다.
+#### 처음 2개 색은 저항의 값이고, 마지막 색은 곱해야 하는 값이다.
+#### 저항의 값은 다음 표와 같다.
+|색|값|곱|
+|:-:|:-:|:-:|
+| 🖤 |0|1|
+| 🤎 |1|10|
+| ❤ |2|100|
+| 🧡 |3|1000|
+| 💛 |4|10000|
+| 💚 |5|100000|
+| 💙 |6|1000000|
+| 💜 |7|10000000|
+| Grey |8|100000000|
+| White |9|1000000000|
 # 4. 소감
 ```
 오늘 창의공학 강의 내용인 수신기를 이용하여 로봇 자율 주행에 대해 팀 끼리 함께 토론을 하며 실습했습니다.
